@@ -1,8 +1,9 @@
-from ex48.parser import *
+from ex48.parser import Sentence as Sen
 
-x = parse_sentence([('verb', 'run'), ('direction', 'north')])
+mySen = Sen()
+mySen.parse_sentence([('verb', 'run'), ('direction', 'north')])
 
-print(x.subject)
-print(x.verb)
-print(x.object)
+print(mySen.subject)
+print(mySen.verb)
+print(mySen.object)
 
