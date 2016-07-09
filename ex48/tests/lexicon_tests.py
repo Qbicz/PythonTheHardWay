@@ -1,5 +1,5 @@
 from nose.tools import *
-from ex48_advanced_input.lexicon import lexicon
+from ex48.lexicon import lexicon
 
 
 def test_directions():

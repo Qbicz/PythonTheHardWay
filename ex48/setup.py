@@ -6,7 +6,7 @@ except ImportError:
     print("distutils.core setup")
     
 config = {
-    'description': 'Advanced User Input - lexicon',
+    'description': 'Advanced User Input - lexicon - the module tells whether the input is from category from our lexicon',
     'author': 'Filip Kubicz',
     'url': 'http://github.com/Qbicz',
     'download_url': 'where to download',
