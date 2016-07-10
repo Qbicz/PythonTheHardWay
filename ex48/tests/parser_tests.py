@@ -1,6 +1,6 @@
 from nose.tools import assert_equal
 from nose.tools import assert_raises
-from ex48.parser import Sentence
+from ex48.parser import Sentence, ParserError
 
 def test_init():
     testSen = Sentence()
@@ -41,13 +41,36 @@ def test_skip_multi():
     assert_equal(word_list, [('noun','fortress')])
     
 def test_parse_verb():
-    pass
+    testSen = Sentence()
+    word_list = [('verb', 'kill'), ('stop', 'an'), ('noun', 'orc')]
+    
+    testSen.parse_verb(word_list)
+    assert_equal(testSen.verb, 'kill')
+    
+    # make sure method throws a proper exception
+    assert_raises(ParserError, testSen.parse_verb, word_list)
     
 def test_parse_object():
-    pass
+    testSen = Sentence()
+    word_list = [('stop', 'an'),('noun', 'orc')]
+    
+    testSen.parse_object(word_list)
+    assert_equal(testSen.object, 'orc')
+    
+    # next function call should raise an exception
+    assert_raises(ParserError, testSen.parse_object, word_list)
+
     
 def test_parse_subject():
-    pass
+    testSen = Sentence()
+    word_list = [('noun','Aragorn'),('verb', 'kill'), ('stop', 'an'), ('noun', 'orc')]
+    
+    testSen.parse_verb(word_list)
+    assert_equal(testSen.verb, 'kill')
+    
+    # with only exception param, this function returns a context
+    with assert_raises(ParserError):
+        testSen.parse_subject(word_list)
     
 def test_parse_sentence():
     pass
