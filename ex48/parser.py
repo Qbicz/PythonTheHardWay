@@ -72,7 +72,7 @@ class Sentence:
         elif next_word == 'verb':
             self.subject = 'player' # subject defaults to 'player'
         else:
-            raise ParseError("Expected a subject or verb next.")
+            raise ParserError("Expected a subject or verb next.")
 
             
     def parse_sentence(self, word_list):

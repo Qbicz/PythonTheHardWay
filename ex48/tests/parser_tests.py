@@ -47,8 +47,15 @@ def test_parse_verb():
     testSen.parse_verb(word_list)
     assert_equal(testSen.verb, 'kill')
     
-    # make sure method throws a proper exception
-    assert_raises(ParserError, testSen.parse_verb, word_list)
+    
+def test_parse_verb_exceptions():
+    testSen = Sentence()
+    word_list = [('noun', 'orc'), ('verb','escapes')]
+    
+    # with only exception param, assert_raises works as context manager
+    # make sure method throws a proper exception:
+    with assert_raises(ParserError):
+        testSen.parse_verb(word_list)
     
 def test_parse_object():
     testSen = Sentence()
@@ -56,19 +63,28 @@ def test_parse_object():
     
     testSen.parse_object(word_list)
     assert_equal(testSen.object, 'orc')
+
+def test_parse_object_exceptions():
+    testSen = Sentence()
+    word_list = [('verb', 'yell'), ('stop', 'for'), ('noun', 'help')]
     
     # next function call should raise an exception
-    assert_raises(ParserError, testSen.parse_object, word_list)
+    with assert_raises(ParserError):
+        testSen.parse_object(word_list)
 
     
 def test_parse_subject():
     testSen = Sentence()
-    word_list = [('noun','Aragorn'),('verb', 'kill'), ('stop', 'an'), ('noun', 'orc')]
+    word_list = [('noun','Aragorn'),('verb', 'kills'), ('stop', 'an'), ('noun', 'orc')]
     
-    testSen.parse_verb(word_list)
-    assert_equal(testSen.verb, 'kill')
+    testSen.parse_subject(word_list)
+    assert_equal(testSen.subject, 'Aragorn')
     
-    # with only exception param, this function returns a context
+def test_parse_subject_exceptions():
+    testSen = Sentence()
+    # some bullshit value to bypass defaulting to 'player'
+    word_list = [('crap', 'rotfl'), ('stop', 'an'), ('noun', 'orc')]
+    
     with assert_raises(ParserError):
         testSen.parse_subject(word_list)
     
