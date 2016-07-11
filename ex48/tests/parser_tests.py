@@ -89,5 +89,10 @@ def test_parse_subject_exceptions():
         testSen.parse_subject(word_list)
     
 def test_parse_sentence():
-    pass
+    testSen = Sentence()
+    testSen.parse_sentence([('verb', 'run'), ('direction', 'north')])
+
+    assert_equal(testSen.subject, 'player') # defaulting should work in this case
+    assert_equal(testSen.verb, 'run')
+    assert_equal(testSen.object, 'north')
     
